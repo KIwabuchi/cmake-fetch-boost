@@ -4,6 +4,10 @@ include(FetchContent)
 
 set(CMAKE_CXX_STANDARD 20)
 
+# URL can be a path to already downloaded boost file. -
+# https://github.com/boostorg/boost/releases - Must be a compressed version
+# (e.g., *.tar.gz). - Must be *-cmake version. If the directory is already
+# uncompressed, use SOURCE_DIR instaend of URL.
 FetchContent_Declare(
   Boost
   URL https://github.com/boostorg/boost/releases/download/boost-1.87.0/boost-1.87.0-cmake.tar.gz
@@ -19,12 +23,12 @@ set(BOOST_INCLUDE_LIBRARIES
     uuid
     graph)
 
-# Required on LC
-# This option works >= boost-1.87
-# set(BOOST_UUID_LINK_LIBATOMIC OFF)
+# Boost::uuid depends on libatomic by default. On LC, libatomic is not available
+# somehow. To make Boost::uuid stop depending on libatomic, use:
+# set(BOOST_UUID_LINK_LIBATOMIC OFF) NOTE: this option works with boost-1.87 For
+# older versions, we need to modify their CMake files manually.
 
 FetchContent_MakeAvailable(Boost)
-
 # Memo: boost_POPULATED is set to TRUE by FetchContent_MakeAvailable This can be
 # used to avoid calling find_packge() in child projects
 
