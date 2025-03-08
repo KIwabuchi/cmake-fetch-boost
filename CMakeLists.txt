@@ -25,10 +25,12 @@ set(BOOST_INCLUDE_LIBRARIES
     uuid
     graph)
 
-# Boost::uuid depends on libatomic by default. On LC, libatomic is not available
-# somehow. To make Boost::uuid stop depending on libatomic, use:
-# set(BOOST_UUID_LINK_LIBATOMIC OFF) NOTE: this option works with boost-1.87 For
-# older versions, we need to modify their CMake files manually.
+# Boost::uuid depends on libatomic by default.
+# On LC, libatomic is not available somehow.
+# To make Boost::uuid stop depending on libatomic, use:
+# set(BOOST_UUID_LINK_LIBATOMIC OFF)
+# NOTE: this option works with boost-1.87.
+# For older versions, we need to modify their CMake files manually.
 
 FetchContent_MakeAvailable(Boost)
 # Memo: boost_POPULATED is set to TRUE by FetchContent_MakeAvailable This can be
