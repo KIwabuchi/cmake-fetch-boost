@@ -22,7 +22,7 @@ endfunction()
 # Fetch Boost libraries using FetchContent.
 # Check if Boost is already available using FetchContent first.
 # If not, fetch Boost based on the provided SOURCE or URL.
-# Input:
+# Arguments:
 #   Required:
 #       COMPONENTS - List of Boost components to include (e.g., filesystem, system)
 #   Optional:

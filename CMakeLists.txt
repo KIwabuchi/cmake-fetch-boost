@@ -13,7 +13,6 @@ include(fetch_boost)
 #
 # Fetch Boost using the fetch_boost() function defined in fetch_boost.cmake
 #
-
 # User options to specify Boost source or URL
 set(BOOST_SOURCE_DIR CACHE STRING "Path to Boost libraries directory already uncompressed. Must be a version that supports CMake.")
 set(BOOST_FETCH_URL CACHE STRING "URL or file path to an archived Boost source. Must be a version that supports CMake.")
