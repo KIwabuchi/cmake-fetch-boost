@@ -28,11 +28,11 @@ make
 
 # Use a custom FETCH URL
 # BOOST_FETCH_URL can be set to a local directory or a URL.
-# The Boost source must be an archived file with CMake support.
+# The Boost source must be an archived file and supports CMake.
 cmake ../ -DBOOST_FETCH_URL=https://github.com/boostorg/boost/releases/download/boost-1.88.0/boost-1.88.0-cmake.tar.gz
 make
 
-# Use an already and compressed Boost source directory with CMake support.
+# Use an already uncompressed CMake supported Boost.
 # This mode copies only the files needed to all the Boost components this project depends on.
 wget https://github.com/boostorg/boost/releases/download/boost-1.88.0/boost-1.88.0-cmake.tar.gz
 tar xvf boost_1_88_0.tar.gz
