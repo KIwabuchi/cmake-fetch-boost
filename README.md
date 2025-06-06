@@ -4,8 +4,7 @@ This CMake project shows how to fetch Boost C++ Libraries using CMake's FetchCon
 
 ## Key Components
 
-- `fetch_boost.cmake`
-  - CMake module to fetch Boost C++ Libraries
+- CMake module to fetch Boost C++ Libraries
   - Main contribution of this project
   - Path: `./cmake/fetch_boost.cmake`
 - Main CMake script
