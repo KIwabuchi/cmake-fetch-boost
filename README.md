@@ -13,7 +13,7 @@ This CMake project shows how to fetch Boost C++ Libraries using CMake's FetchCon
   - Path: `./cmake/fetch_boost.cmake`
 
 This CMake script does not look for already installed Boost libraries
-(using `find_package()`) to  reduce the complexity of the script.
+(using `find_package()`) to reduce the complexity of the script.
 
 ## Build
 
@@ -34,6 +34,7 @@ cmake ../ -DBOOST_FETCH_URL=https://github.com/boostorg/boost/releases/download/
 make
 
 # Use an already and compressed Boost source directory with CMake support.
+# This mode copies only the files needed to all the Boost components this project depends on.
 wget https://github.com/boostorg/boost/releases/download/boost-1.88.0/boost-1.88.0-cmake.tar.gz
 tar xvf boost_1_88_0.tar.gz
 cmake ../ -DBOOST_SOURCE_DIR=boost_1_88_0
