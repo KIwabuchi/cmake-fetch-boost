@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 3.20)
-project(test_fetch_content)
+cmake_minimum_required(VERSION 3.15)
+project(cmake-fetch-boost)
 
 # Just to suppress warnings
 if (${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.24")
@@ -21,13 +21,13 @@ set(BOOST_FETCH_URL CACHE STRING "URL or file path to an archived Boost source. 
 set(BOOST_COMPS container json)
 
 if (BOOST_SOURCE_DIR)
-  fetch_boost(SOURCE ${BOOST_SOURCE_DIR} COMPONENTS ${BOOST_COMPS} VERBOSE)
+  fetch_boost(SOURCE ${BOOST_SOURCE_DIR} COMPONENTS ${BOOST_COMPS})
 elseif (BOOST_FETCH_URL)
-  fetch_boost(URL ${BOOST_FETCH_URL} COMPONENTS ${BOOST_COMPS} VERBOSE)
+  fetch_boost(URL ${BOOST_FETCH_URL} COMPONENTS ${BOOST_COMPS})
 else ()
   # Use default Boost version if not specified by the user
   fetch_boost(URL "https://github.com/boostorg/boost/releases/download/boost-1.88.0/boost-1.88.0-cmake.tar.gz"
-              COMPONENTS ${BOOST_COMPS} VERBOSE)
+              COMPONENTS ${BOOST_COMPS})
 endif ()
 
 message(STATUS "BOOST_LIBS: ${BOOST_LIBS}")

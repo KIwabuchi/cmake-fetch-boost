@@ -28,20 +28,24 @@ endfunction()
 #   Optional:
 #      SOURCE - Path to Boost libraries directory already uncompressed. Must be a version that supports CMake.
 #       URL - URL or file path to an archived Boost source. Must be a version that supports CMake.
-#       VERBOSE - If set, enable VERBOSE mode.
 # Output:
 #   BOOST_LIBS - List of Boost components to link using link_libraries() or target_link_libraries()
 function(fetch_boost)
+    # Add a prefix ('fetch_boost') to the messages.
+    # To show prefix, set CMAKE_MESSAGE_CONTEXT to true.
+    if (${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.17")
+        list(APPEND CMAKE_MESSAGE_CONTEXT "fetch_boost")
+    endif ()
+
     # Unset input variables to avoid interference
-    unset(__fetch_boost_VERBOSE)
     unset(__fetch_boost_COMPONENTS)
     unset(__fetch_boost_SOURCE)
     unset(__fetch_boost_URL)
 
-    cmake_parse_arguments(__fetch_boost "VERBOSE" "URL;SOURCE" "COMPONENTS" ${ARGV})
+    cmake_parse_arguments(__fetch_boost "" "URL;SOURCE" "COMPONENTS" ${ARGV})
 
     if (__fetch_boost_URL AND __fetch_boost_SOURCE)
-        message(FATAL_ERROR "Both __fetch_boost_SOURCE and __fetch_boost_URL cannot be set at the same time")
+        message(FATAL_ERROR "Both SOURCE and URL arguments cannot be set at the same time")
     endif ()
 
     # Boost's CMake uses BOOST_INCLUDE_LIBRARIES to specify the components to include.
@@ -49,20 +53,14 @@ function(fetch_boost)
 
     if (boost_POPULATED)
         # Boost is already available by FetchContent.
-        if (__fetch_boost_VERBOSE)
-            message(STATUS "Boost was already populated")
-        endif ()
+        message(VERBOSE "Boost was already populated")
         # This is likely not required. We do this just in case.
         fetch_boost_url("https://github.com/boostorg/boost/releases/download/boost-1.87.0/boost-1.87.0-cmake.tar.gz")
     elseif (__fetch_boost_SOURCE)
-        if (__fetch_boost_VERBOSE)
-            message(STATUS "Will fetch Boost source from ${__fetch_boost_SOURCE}")
-        endif ()
+        message(VERBOSE "Will fetch Boost source from ${__fetch_boost_SOURCE}")
         fetch_boost_source(${__fetch_boost_SOURCE})
     elseif (__fetch_boost_URL)
-        if (__fetch_boost_VERBOSE)
-            message(STATUS "Will fetch Boost from ${__fetch_boost_URL}")
-        endif ()
+        message(VERBOSE "Will fetch Boost from ${__fetch_boost_URL}")
         fetch_boost_url(${__fetch_boost_URL})
     else ()
         message(WARNING "Boost was not populated or fetched")

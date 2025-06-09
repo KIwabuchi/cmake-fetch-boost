@@ -38,9 +38,17 @@ wget https://github.com/boostorg/boost/releases/download/boost-1.88.0/boost-1.88
 tar xvf boost_1_88_0.tar.gz
 cmake ../ -DBOOST_SOURCE_DIR=boost_1_88_0
 make
+
 ```
 
-**Boost UUID Link Error**
+### VERBOSE Message
+
+Run CMake with `--log-level=VERBOSE` to show verbose messages.
+
+The `fetch_boost` module supports the [message context](https://cmake.org/cmake/help/v3.24/variable/CMAKE_MESSAGE_CONTEXT.html#variable:CMAKE_MESSAGE_CONTEXT). 
+Run CMake with '-DCMAKE_MESSAGE_CONTEXT_SHOW=true' to show the message context (CMake >= 3.17 is required).
+
+### Boost UUID Link Error
 
 Boost::uuid depends on libatomic by default.
 On some machines, libatomic is not available somehow.
